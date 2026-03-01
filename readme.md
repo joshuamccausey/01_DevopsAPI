@@ -10,6 +10,7 @@ The following tools will be utilized (subject to change at time of writing).
 - Git for version management
 - AWS for hosting
 - Terraform for IaC
+- Github Actions for CI/CD
 - Gunicorn for request hanlding
 - FastAPI for backend logic (Was Django, see UPDATE 03-01-26 7:58AM)
 - Custom code for API application
