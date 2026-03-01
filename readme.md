@@ -9,8 +9,9 @@ The following tools will be utilized (subject to change at time of writing).
 - Docker for containerization
 - Git for version management
 - AWS for hosting
-- Gunicron for request hanlding
-- Django for backend logic
+- Terraform for IaC
+- Gunicorn for request hanlding
+- FastAPI for backend logic (Was Django, see UPDATE 03-01-26 7:58AM)
 - Custom code for API application
 
 ## UPDATES
