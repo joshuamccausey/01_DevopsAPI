@@ -7,11 +7,11 @@ app = FastAPI()
 
 def get_weather():
     location = input("Enter your zip code")
-    response = requests.get("http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}")
+    api_key = "89be9949d4f3e957623120d37377899f"
+    response = requests.get(f"http://api.openweathermap.org/geo/1.0/zip?zip={location},US&appid={api_key}")
     data = response.json()
     lat = data["lat"]
     lon = data["lon"]
-    api_key = "89be9949d4f3e957623120d37377899f"
     weather_response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}")
     weather_data = weather_response.json()
     return weather_data
@@ -21,6 +21,9 @@ def get_weather():
 def current_weather():
     weather_data = get_weather()
     return weather_data
+
+
+get_weather()
 
 
 
