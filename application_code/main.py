@@ -4,13 +4,7 @@ import requests
 
 app = FastAPI()
 
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: bool | None = None
 
-
-@app.get("/current_weather")
 def get_weather():
     location = input("Enter your zip code")
     response = requests.get("http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}")
@@ -23,10 +17,19 @@ def get_weather():
     return weather_data
 
 
+@app.get("/current_weather")
+def current_weather():
+    weather_data = get_weather()
+    return weather_data
 
 
 
 """
+class Item(BaseModel):
+    name: str
+    price: float
+    is_offer: bool | None = None
+
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str | None = None):
     return {"item_id": item_id, "q": q}
