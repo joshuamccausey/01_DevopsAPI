@@ -20,3 +20,6 @@ This file is being written on 03-01-2026. I am adding this section because as th
 
 ### 03-03-26 UPDATE
 I have my main.py code running as expected. It utilizes the API provided by openweathermap.org and collects the client zip through the GET reqest /current_weather/{location} and then returns a string including the average temp in F and the general description of conditions.
+APIs in use:
+https://openweathermap.org/api/geocoding-api?collection=other
+https://openweathermap.org/current?collection=current_forecast
