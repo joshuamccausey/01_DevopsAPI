@@ -17,3 +17,6 @@ The following tools will be utilized (subject to change at time of writing).
 
 ## UPDATES
 This file is being written on 03-01-2026. I am adding this section because as this is primaryily a learning project, I want an area to update my goals and requirements so that I can track my improvment in understanding.
+
+### 03-03-26 UPDATE
+I have my main.py code running as expected. It utilizes the API provided by openweathermap.org and collects the client zip through the GET reqest /current_weather/{location} and then returns a string including the average temp in F and the general description of conditions.
