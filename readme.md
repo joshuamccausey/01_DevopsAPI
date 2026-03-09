@@ -23,3 +23,6 @@ I have my main.py code running as expected. It utilizes the API provided by open
 APIs in use:
 https://openweathermap.org/api/geocoding-api?collection=other
 https://openweathermap.org/current?collection=current_forecast
+
+### 03-09-26 UPDATE
+I have completed my dockerfile that properly packages my source code along with dependancies. The image has been built and uploaded to my private docker repository but can be run using "docker run -d -p 8080:8000 joshuamccausey/01_devopsapi". This will open up port 8080 on the host VM and send the traffic to the container. I just tested this and it ran successfully. I was able to send a GET request using "curl {HOST-IP}:8080/current_weather/{zip}
