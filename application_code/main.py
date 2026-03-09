@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 import requests
 
 app = FastAPI()
@@ -22,20 +21,4 @@ def current_weather(location: str):
     return "Expect " + str(weather_data["weather"][0]["description"]) + " with an average temperature of " + str(weather_data["main"]["temp"]) + " degrees Fahrenheit."
 
 
-
-
-"""
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: bool | None = None
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
-    return {"item_id": item_id, "q": q}
-
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return {"item_name": item.name, "item_id": item_id}
-"""
 
