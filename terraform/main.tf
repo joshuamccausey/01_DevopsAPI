@@ -7,10 +7,10 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-*-22.04-arm64-server-*"]
   }
 
-  owners = ["01_devopsapi"] # Canonical
+  owners = ["099720109477"] # Canonical
 }
 
 resource "aws_instance" "app_server" {
