@@ -5,7 +5,7 @@ app = FastAPI()
 
 
 def get_weather(location: str):
-    api_key = "89be9949d4f3e957623120d37377899f"
+    api_key = ""
     response = requests.get(f"http://api.openweathermap.org/geo/1.0/zip?zip={location},US&appid={api_key}")
     data = response.json()
     lat = data["lat"]
