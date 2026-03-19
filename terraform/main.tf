@@ -16,7 +16,7 @@ data "aws_ami" "ubuntu" {
 
 # Create an EC2 key pair for SSH access
 resource "aws_key_pair" "deployer" {
-  key_name = "developer_key"
+  key_name   = "developer_key"
   public_key = file("~/.ssh/aws_ec2_key.pub")
 }
 
@@ -25,14 +25,14 @@ resource "aws_key_pair" "deployer" {
 resource "aws_security_group" "app_server_sg" {
   name        = "app_server_sg"
   description = "Allow HTTP traffic to app server"
-  vpc_id = aws_vpc.main.id
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["66.187.96.118/32"]
-}
+  }
 
   ingress {
     from_port   = 8000
@@ -45,9 +45,9 @@ resource "aws_security_group" "app_server_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"] 
+    cidr_blocks = ["0.0.0.0/0"]
 
-}
+  }
 }
 
 resource "aws_vpc" "main" {
@@ -82,13 +82,13 @@ resource "aws_route_table_association" "main" {
 # EC2 instance for the application server
 
 resource "aws_instance" "app_server" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t4g.micro"
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = "t4g.micro"
   associate_public_ip_address = true
-  key_name = aws_key_pair.deployer.key_name
+  key_name                    = aws_key_pair.deployer.key_name
 
-  subnet_id = aws_subnet.main.id
-  vpc_security_group_ids = [aws_security_group.app_server_sg.id] 
+  subnet_id              = aws_subnet.main.id
+  vpc_security_group_ids = [aws_security_group.app_server_sg.id]
 
   tags = {
     Name = "01_devopsapi_app_server"
