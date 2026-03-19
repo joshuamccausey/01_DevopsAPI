@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 import requests
+import os
 
 app = FastAPI()
 
 
 def get_weather(location: str):
-    api_key = ""
+    api_key = os.getenv("OPENWEATHERMAP_API_KEY")
     response = requests.get(f"http://api.openweathermap.org/geo/1.0/zip?zip={location},US&appid={api_key}")
     data = response.json()
     lat = data["lat"]

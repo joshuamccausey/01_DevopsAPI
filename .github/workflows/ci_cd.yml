@@ -74,6 +74,16 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TERRAFORM_API_TOKEN }}
 
+    # Generate a key pair for GitHub Action to use to authenticate with the EC2 instance
+    - name: Generate SSH Key
+      run: ssh-keygen -t ed25519 -f ~/.ssh/aws_ec2_key -N ""
+
+    # Add weather API key to application code from GitHub secrets
+    - name: Add Weather API Key to Application Code
+      env:
+        OPENWEATHERMAP_API_KEY: ${{ secrets.OPENWEATHERMAP_API_KEY }}
+      run: ...
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
