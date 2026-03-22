@@ -20,6 +20,7 @@ resource "aws_key_pair" "deployer" {
   public_key = file("~/.ssh/aws_ec2_key.pub")
 }
 
+
 # Networking resources
 
 resource "aws_security_group" "app_server_sg" {
@@ -31,7 +32,7 @@ resource "aws_security_group" "app_server_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["66.187.96.118/32"]
+    cidr_blocks = ["0.0.0.0"]
   }
 
   ingress {
