@@ -68,11 +68,8 @@ jobs:
 
     - name: Wait for EC2
       run: |
-        for i in {1..30}; do
-          ssh -i ~/.ssh/aws_ec2_key -o "StrictHostKeyChecking=no" -o "ConnectTimeout=5" ubuntu@$(terraform -chdir=./terraform output -raw public_ip) "echo connected" && break
-          echo "Attempt $i failed, retrying in 10s..."
-          sleep 10
-        done
+        Echo "Waiting for EC2 instance to be ready..."
+        Sleep 240
 
     # Copy the generated SSH key to the EC2 instance and add the GitHub SSH key as a deploy key to the EC2 instance for authentication when cloning the GitHub repository
     - name: Copy GitHub SSH key to EC2
