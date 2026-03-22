@@ -42,9 +42,10 @@ jobs:
     - name: Generate SSH Key
       run: ssh-keygen -t ed25519 -f ~/.ssh/aws_ec2_key -N ""
 
-    #Delete existing key pair to avoid error when creating new key pair with same name in Terraform configuration files
-    - name: Delete existing key pair
-      run: aws ec2 delete-key-pair --key-name developer_key --region us-east-2
+    # Delete any existing infrastructure according to Terraform configuration files before building or changing infrastructure according to Terraform configuration files to ensure that the EC2 instance is always recreated with the new SSH key and weather API key
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve
+      working-directory: ./terraform
 
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
