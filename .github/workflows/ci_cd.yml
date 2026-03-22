@@ -61,7 +61,7 @@ jobs:
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      run: terraform apply -auto-approve -replace="aws_instance.app_server"
+      run: terraform apply -auto-approve -replace="aws_instance.app_server -replace="aws_key_pair.deployer"
       working-directory: ./terraform
 
     # Copy the generated SSH key to the EC2 instance and add the GitHub SSH key as a deploy key to the EC2 instance for authentication when cloning the GitHub repository
