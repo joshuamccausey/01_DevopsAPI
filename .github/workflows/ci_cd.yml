@@ -42,6 +42,10 @@ jobs:
     - name: Generate SSH Key
       run: ssh-keygen -t ed25519 -f ~/.ssh/aws_ec2_key -N ""
 
+    #Delete existing key pair to avoid error when creating new key pair with same name in Terraform configuration files
+    - name: Delete existing key pair
+      run: aws ec2 delete-key-pair --key-name developer_key --region us-east-2
+
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -61,7 +65,7 @@ jobs:
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      run: terraform apply -auto-approve -replace="aws_instance.app_server" -replace="aws_key_pair.deployer"
+      run: terraform apply -auto-approve -replace="aws_instance.app_server"
       working-directory: ./terraform
 
     # Copy the generated SSH key to the EC2 instance and add the GitHub SSH key as a deploy key to the EC2 instance for authentication when cloning the GitHub repository
