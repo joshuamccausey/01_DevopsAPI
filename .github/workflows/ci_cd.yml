@@ -78,9 +78,6 @@ jobs:
 
       #SSH into EC2 instance and install docker
     - name: Deploy to EC2 instance
-      run: ssh -i ~/.ssh/aws_ec2_key -o "StrictHostKeyChecking=no" ubuntu@$(terraform -chdir=./terraform output -raw public_ip) "GIT_SSH_COMMAND='ssh -i ~/.ssh/gh_deploy_key -o StrictHostKeyChecking=no' git clone git@github.com:joshuamccausey/01_devopsapi.git && cd 01_devopsapi && sudo docker build -t devopsapi . && sudo docker run -d -p 8000:8000 -e OPENWEATHERMAP_API_KEY=${{ secrets.OPENWEATHERMAP_API_KEY }} devopsapi"
-
-    - name: Check Docker Logs
       run: ssh -i ~/.ssh/aws_ec2_key -o "StrictHostKeyChecking=no" ubuntu@$(terraform -chdir=./terraform output -raw public_ip) "GIT_SSH_COMMAND='ssh -i ~/.ssh/gh_deploy_key -o StrictHostKeyChecking=no' git clone git@github.com:joshuamccausey/01_devopsapi.git && cd 01_devopsapi && sudo docker build -t devopsapi . && sudo docker run -d -p 8000:8000 -e OPENWEATHERMAP_API_KEY=${{ secrets.OPENWEATHERMAP_API_KEY }} devopsapi && sleep 3 && sudo docker logs \$(sudo docker ps -aq | head -1)"
 
       # Need following code to add api key to source code
