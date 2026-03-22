@@ -29,3 +29,17 @@ I have completed my dockerfile that properly packages my source code along with 
 
 ### 03-12-26 UPDATE
 Today, I was able to finish my Terraform code to setup the required networking infrastructure. I have setup a VPC, subnet, gateway, and routing table to allow the EC2 VM to access the internet and have whitelisted access to my personal IP address. I whitelisted inbound for port 22 (SSH) as well as port 8000 (FastAPI listening port). Once that was all completed, I was able to generate an SSH key using ssh_key_pair and get it assigned to my EC2 VM through the terraform code. This allowed me to SSH into the VM, install Docker, generate another SSH key which I could use to authenticate with my Github account and make the code pull. I then built the docker image for the project, ran it using "docker run -d -p 8000:8000 01_devopsapi_prod" and then was able to make API calls to the docker container from my home IP. At this point, the only piece I have integrated would be CI/CD using GitHub Actions.
+
+### 03-22-26 UPDATE
+As of this morning, this project is officially completed. Now, upon new git push actions into the main branch, the Workflow file will get read (ci_cd.yml) and then GitHub will do the following:
+- Spin up Ubuntu VM to run the workflow file on
+- Connect to AWS and setup a SSH key to push into the EC2 instance later
+- Delete exisiting infra
+- Spin up new infra including EC2 instance with SSH key pushed into the environment
+    - The Terraform code does most of the work here including installing Docker and Github into the production VM
+- SSH into EC2 instance
+- Clone GitHub repository
+- Build docker image
+- Run docker image
+- Print docker logs
+All key's within this environemnt including AWS, SSH, etc are stored within GitHub as secrets and then called upon through the workflow file.
