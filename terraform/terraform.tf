@@ -6,7 +6,7 @@ terraform {
     }
   }
   # Create state storage buck
-backend "s3" {
+  backend "s3" {
     bucket = "01-devopsapi-state"
     key    = "terraform.tfstate"
     region = "us-east-2"
