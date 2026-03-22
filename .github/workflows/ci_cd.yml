@@ -68,7 +68,7 @@ jobs:
 
     - name: Wait for EC2 to be running
       run: |
-        aws ec2 wait instance-running --instance-ids $(terraform -chdir=./terraform output -raw instance_id) --region us-east-2
+        aws ec2 wait instance-status-ok --instance-ids $(terraform -chdir=./terraform output -raw instance_id) --region us-east-2
 
     # Copy the generated SSH key to the EC2 instance and add the GitHub SSH key as a deploy key to the EC2 instance for authentication when cloning the GitHub repository
     - name: Copy GitHub SSH key to EC2
