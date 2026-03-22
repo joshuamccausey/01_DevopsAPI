@@ -93,4 +93,20 @@ resource "aws_instance" "app_server" {
   tags = {
     Name = "01_devopsapi_app_server"
   }
+
+  user_data = <<-EOF
+  #!/bin/bash
+  apt-get update
+  apt-get install -y docker.io
+  systemctl start docker
+  systemctl enable docker
+  usermod -aG docker ubuntu
+  apt-get install -y git
+EOF
+
+}
+
+# Public IP output for GitHub Action to SSH into EC2 instance and deploy docker container
+output "public_ip" {
+  value = aws_instance.app_server.public_ip
 }
